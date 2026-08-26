@@ -121,6 +121,8 @@ services:
     restart: unless-stopped
     environment:
       NACOS_SERVER_ADDR: nacos:8848
+      # 开源交付包：不注册闭源行业服务路由（crm/inventory/finance/file/iot/device-gateway）
+      LSC_INDUSTRY_ROUTES_ENABLED: "false"
     depends_on:
       auth: { condition: service_started }
       user: { condition: service_started }
