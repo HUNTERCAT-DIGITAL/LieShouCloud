@@ -1,0 +1,18 @@
+[submodule "LieShouCloud-core"]
+	path = LieShouCloud-core
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-core.git
+[submodule "LieShouCloud-web"]
+	path = LieShouCloud-web
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-web.git
+[submodule "LieShouCloud-admin-web"]
+	path = LieShouCloud-admin-web
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-admin-web.git
+[submodule "LieShouCloud-desktop"]
+	path = LieShouCloud-desktop
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-desktop.git
+[submodule "LieShouCloud-mobile"]
+	path = LieShouCloud-mobile
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-mobile.git
+[submodule "LieShouCloud-mini-program"]
+	path = LieShouCloud-mini-program
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-mini-program.git
