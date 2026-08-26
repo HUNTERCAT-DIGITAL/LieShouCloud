@@ -40,3 +40,6 @@
 [submodule "LieShouCloud-ui"]
 	path = LieShouCloud-ui
 	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-ui.git
+[submodule "LieShouCloud-jwt-support"]
+	path = LieShouCloud-jwt-support
+	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-jwt-support.git
