@@ -123,6 +123,8 @@ services:
       NACOS_SERVER_ADDR: nacos:8848
       # 开源交付包：不注册闭源行业服务路由（crm/inventory/finance/file/iot/device-gateway）
       LSC_INDUSTRY_ROUTES_ENABLED: "false"
+      # CORS 白名单（浏览器 preflight 校验；缺省不含公网域名会导致登录 Failed to fetch）
+      CORS_ALLOWED_ORIGINS: "https://lieshoucloud.huntercat.cn,http://localhost:5173,http://localhost:8080"
     depends_on:
       auth: { condition: service_started }
       user: { condition: service_started }
