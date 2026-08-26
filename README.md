@@ -16,7 +16,7 @@ LieShouCloudPlatform(交付包,开源)
 ├── LieShouCloud-common/        后端共享库(统一异常/错误码)
 ├── LieShouCloud-jwt-support/   后端共享库(JWT)
 ├── LieShouCloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
-├── LieShouCloud-web/           前端共享层(api-client/config/types/ui)
+├── LieShouCloud-{api-client,config,types,ui}/   前端共享层(2026-08 细拆分)
 ├── LieShouCloud-admin-web/     B 端管理后台
 ├── LieShouCloud-desktop/       桌面端
 ├── LieShouCloud-mobile/        移动端
@@ -51,7 +51,7 @@ docker compose -f deploy/docker-compose.yml up -d
 | 组件 | 定位 | 说明 |
 | --- | --- | --- |
 | [LieShouCloud-common](LieShouCloud-common/README.md) / [jwt-support](LieShouCloud-jwt-support/README.md) | 后端共享库 | 异常契约 / JWT |
-| [LieShouCloud-web](LieShouCloud-web/README.md) | 前端共享 | api-client/config/types/ui |
+| [LieShouCloud-api-client](LieShouCloud-api-client/README.md) / [config](LieShouCloud-config/README.md) / [types](LieShouCloud-types/README.md) / [ui](LieShouCloud-ui/README.md) | 前端共享 | 传输/配置/契约/UI(2026-08 细拆分) |
 | LieShouCloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(组合 common/jwt-support) |
 | [LieShouCloud-admin-web](LieShouCloud-admin-web/README.md) | B 端后台 | 演示/通用页面 |
 | [LieShouCloud-desktop](LieShouCloud-desktop/README.md) | 桌面端 | Tauri 2 |
@@ -62,7 +62,7 @@ docker compose -f deploy/docker-compose.yml up -d
 
 ```bash
 # 升级全部组件到各自 main
-for s in LieShouCloud-common LieShouCloud-jwt-support LieShouCloud-gateway-services LieShouCloud-user-services LieShouCloud-admin-services LieShouCloud-auth-services LieShouCloud-approval-services LieShouCloud-web LieShouCloud-admin-web LieShouCloud-desktop LieShouCloud-mobile LieShouCloud-mini-program; do
+for s in LieShouCloud-common LieShouCloud-jwt-support LieShouCloud-gateway-services LieShouCloud-user-services LieShouCloud-admin-services LieShouCloud-auth-services LieShouCloud-approval-services LieShouCloud-api-client LieShouCloud-config LieShouCloud-types LieShouCloud-ui LieShouCloud-admin-web LieShouCloud-desktop LieShouCloud-mobile LieShouCloud-mini-program; do
   git -C $s fetch origin main && git -C $s checkout origin/main && git add $s
 done
 git commit -m "chore: bump components → latest"
