@@ -1,7 +1,8 @@
-# LieShouCloudPlatform · 猎手云开源交付包
+# LieShouCloud · 猎手云开源版（演示项目）
 
-> **统一交付入口**:组合开源组件(后端底座 + 前端共享 + 4 端应用)+ 部署编排,一键起全栈。
-> 组件独立演进,交付包只做组合与装配(与客户交付包同构的 superproject 模式)。
+> **开源版全栈演示项目**：组合开源组件（后端底座 + 前端共享 + 4 端应用）+ 部署编排，一键起全栈，可直接部署体验完整数字化平台。
+> 组件独立演进，交付包只做组合与装配（与客户交付包同构的 superproject 模式）。
+> 代码全部开源（Apache-2.0），可 fork 自部署、二次开发。
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-21-orange" alt="Java 21"/>
@@ -12,7 +13,7 @@
 ## 组合结构
 
 ```
-LieShouCloudPlatform(交付包,开源)
+LieShouCloud（猎手云开源版 · 演示项目）
 ├── LieShouCloud-common/        后端共享库(统一异常/错误码)
 ├── LieShouCloud-jwt-support/   后端共享库(JWT)
 ├── LieShouCloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
