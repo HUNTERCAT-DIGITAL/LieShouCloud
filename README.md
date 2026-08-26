@@ -13,7 +13,9 @@
 
 ```
 LieShouCloudPlatform(交付包,开源)
-├── LieShouCloud-core/          后端底座(gateway/auth/user/admin/approval/common)
+├── LieShouCloud-common/        后端共享库(统一异常/错误码)
+├── LieShouCloud-jwt-support/   后端共享库(JWT)
+├── LieShouCloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
 ├── LieShouCloud-web/           前端共享层(api-client/config/types/ui)
 ├── LieShouCloud-admin-web/     B 端管理后台
 ├── LieShouCloud-desktop/       桌面端
@@ -28,9 +30,11 @@ LieShouCloudPlatform(交付包,开源)
 # 1. 初始化全部组件
 git submodule update --init --recursive
 
-# 2. 构建后端(core)
-cd LieShouCloud-core/services
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 mvn -B -ntp -DskipTests package
+# 2. 构建后端(common + 服务仓,交付包统一构建入口)
+for svc in common jwt-support gateway user admin auth approval; do
+  [ "$svc" = "common" -o "$svc" = "jwt-support" ] && d="LieShouCloud-$svc" || d="LieShouCloud-$svc-services"
+  (cd $d/services && JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 mvn -B -ntp -DskipTests package)
+done
 
 # 3. 构建前端(admin-web 演示入口)
 cd LieShouCloud-admin-web
@@ -46,8 +50,9 @@ docker compose -f deploy/docker-compose.yml up -d
 
 | 组件 | 定位 | 说明 |
 | --- | --- | --- |
-| [LieShouCloud-core](LieShouCloud-core/README.md) | 后端底座 | Spring Cloud 微服务,开源 |
+| [LieShouCloud-common](LieShouCloud-common/README.md) / [jwt-support](LieShouCloud-jwt-support/README.md) | 后端共享库 | 异常契约 / JWT |
 | [LieShouCloud-web](LieShouCloud-web/README.md) | 前端共享 | api-client/config/types/ui |
+| LieShouCloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(组合 common/jwt-support) |
 | [LieShouCloud-admin-web](LieShouCloud-admin-web/README.md) | B 端后台 | 演示/通用页面 |
 | [LieShouCloud-desktop](LieShouCloud-desktop/README.md) | 桌面端 | Tauri 2 |
 | [LieShouCloud-mobile](LieShouCloud-mobile/README.md) | 移动端 | Expo |
@@ -57,7 +62,7 @@ docker compose -f deploy/docker-compose.yml up -d
 
 ```bash
 # 升级全部组件到各自 main
-for s in LieShouCloud-core LieShouCloud-web LieShouCloud-admin-web LieShouCloud-desktop LieShouCloud-mobile LieShouCloud-mini-program; do
+for s in LieShouCloud-common LieShouCloud-jwt-support LieShouCloud-gateway-services LieShouCloud-user-services LieShouCloud-admin-services LieShouCloud-auth-services LieShouCloud-approval-services LieShouCloud-web LieShouCloud-admin-web LieShouCloud-desktop LieShouCloud-mobile LieShouCloud-mini-program; do
   git -C $s fetch origin main && git -C $s checkout origin/main && git add $s
 done
 git commit -m "chore: bump components → latest"

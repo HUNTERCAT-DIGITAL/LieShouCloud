@@ -50,7 +50,7 @@ services:
   # ============================================================
   user:
     build:
-      context: ./LieShouCloud-core/services
+      context: ./LieShouCloud-user-services/services
       dockerfile: user/Dockerfile
     image: lieshoucloud/user:dev
     container_name: lieshoucloud-user
@@ -62,7 +62,7 @@ services:
 
   admin:
     build:
-      context: ./LieShouCloud-core/services
+      context: ./LieShouCloud-admin-services/services
       dockerfile: admin/Dockerfile
     image: lieshoucloud/admin:dev
     container_name: lieshoucloud-admin
@@ -74,7 +74,7 @@ services:
 
   auth:
     build:
-      context: ./LieShouCloud-core/services
+      context: ./LieShouCloud-auth-services/services
       dockerfile: auth/Dockerfile
     image: lieshoucloud/auth:dev
     container_name: lieshoucloud-auth
@@ -86,7 +86,7 @@ services:
 
   approval:
     build:
-      context: ./LieShouCloud-core/services
+      context: ./LieShouCloud-approval-services/services
       dockerfile: approval/Dockerfile
     image: lieshoucloud/approval:dev
     container_name: lieshoucloud-approval
@@ -98,7 +98,7 @@ services:
 
   gateway:
     build:
-      context: ./LieShouCloud-core/services
+      context: ./LieShouCloud-gateway-services/services
       dockerfile: gateway/Dockerfile
     image: lieshoucloud/gateway:dev
     container_name: lieshoucloud-gateway
