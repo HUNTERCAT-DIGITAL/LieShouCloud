@@ -28,18 +28,18 @@
 [submodule "lieshou-cloud-approval-services"]
 	path = lieshou-cloud-approval-services
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-approval-services.git
-[submodule "lieshou-cloud-api-client"]
-	path = lieshou-cloud-api-client
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-api-client.git
-[submodule "lieshou-cloud-config"]
-	path = lieshou-cloud-config
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-config.git
-[submodule "lieshou-cloud-types"]
-	path = lieshou-cloud-types
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-types.git
-[submodule "lieshou-cloud-ui"]
-	path = lieshou-cloud-ui
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-ui.git
+[submodule "lieshou-contract-api"]
+	path = lieshou-contract-api
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-contract-api.git
+[submodule "lieshou-contract-config"]
+	path = lieshou-contract-config
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-contract-config.git
+[submodule "lieshou-contract-types"]
+	path = lieshou-contract-types
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-contract-types.git
+[submodule "lieshou-ui"]
+	path = lieshou-ui
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-ui.git
 [submodule "lieshou-cloud-jwt-support"]
 	path = lieshou-cloud-jwt-support
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-jwt-support.git
