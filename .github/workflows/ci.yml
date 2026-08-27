@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # submodule URL 均为 SSH(git@github.com:),CI runner 无 SSH key,
+      # 全局重写为 HTTPS(GitHub token 认证 / public 仓库匿名)后 checkout 才能拉取
+      - name: Rewrite submodule URLs to HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
       - name: Checkout (recursive)
         uses: actions/checkout@v4
         with:
@@ -23,7 +27,7 @@ jobs:
           for svc in gateway user admin auth approval; do
             test -f lieshou-cloud-$svc-services/services/$svc/pom.xml
           done
-          test -f lieshou-cloud-admin-web/package.json
+          test -f lieshou-admin-web/package.json
           echo "all components present ✓"
       - name: Validate docker-compose syntax
         run: docker compose -f deploy/docker-compose.yml config --quiet
@@ -33,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      - name: Rewrite submodule URLs to HTTPS
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
       - name: Checkout (recursive)
         uses: actions/checkout@v4
         with:
@@ -44,9 +50,9 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: lieshou-cloud-admin-web/pnpm-lock.yaml
+          cache-dependency-path: lieshou-admin-web/pnpm-lock.yaml
       - name: Build admin-web (frontend dist for nginx)
-        working-directory: lieshou-cloud-admin-web
+        working-directory: lieshou-admin-web
         run: pnpm install --frozen-lockfile && pnpm build
       - name: Start full stack
         run: docker compose -f deploy/docker-compose.yml up -d --build
@@ -72,7 +78,7 @@ jobs:
           JOIN roles r ON r.code='TENANT_ADMIN' WHERE u.username='admin' ON CONFLICT DO NOTHING;
           SQL
       - name: Run Playwright e2e
-        working-directory: lieshou-cloud-admin-web
+        working-directory: lieshou-admin-web
         run: npx playwright install chromium && pnpm e2e
         env:
           E2E_BASE_URL: http://localhost:8080

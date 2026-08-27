@@ -146,8 +146,8 @@ services:
     ports:
       - "${WEB_PORT:-8080}:80"
     volumes:
-      # admin-web 构建产物(先:cd lieshou-cloud-admin-web && pnpm build)
-      - ../lieshou-cloud-admin-web/dist:/usr/share/nginx/html:ro
+      # admin-web 构建产物(先:cd lieshou-admin-web && pnpm build)
+      - ../lieshou-admin-web/dist:/usr/share/nginx/html:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks: [backend]
 
