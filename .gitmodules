@@ -1,45 +1,45 @@
 [submodule "LieShouCloud-admin-web"]
 	path = LieShouCloud-admin-web
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-admin-web.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-admin-web.git
 [submodule "LieShouCloud-desktop"]
 	path = LieShouCloud-desktop
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-desktop.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-desktop.git
 [submodule "LieShouCloud-mobile"]
 	path = LieShouCloud-mobile
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-mobile.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-mobile.git
 [submodule "LieShouCloud-mini-program"]
 	path = LieShouCloud-mini-program
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-mini-program.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-mini-program.git
 [submodule "LieShouCloud-common"]
 	path = LieShouCloud-common
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-common.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-common.git
 [submodule "LieShouCloud-gateway-services"]
 	path = LieShouCloud-gateway-services
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-gateway-services.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-gateway-services.git
 [submodule "LieShouCloud-user-services"]
 	path = LieShouCloud-user-services
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-user-services.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-user-services.git
 [submodule "LieShouCloud-admin-services"]
 	path = LieShouCloud-admin-services
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-admin-services.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-admin-services.git
 [submodule "LieShouCloud-auth-services"]
 	path = LieShouCloud-auth-services
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-auth-services.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-auth-services.git
 [submodule "LieShouCloud-approval-services"]
 	path = LieShouCloud-approval-services
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-approval-services.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-approval-services.git
 [submodule "LieShouCloud-api-client"]
 	path = LieShouCloud-api-client
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-api-client.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-api-client.git
 [submodule "LieShouCloud-config"]
 	path = LieShouCloud-config
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-config.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-config.git
 [submodule "LieShouCloud-types"]
 	path = LieShouCloud-types
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-types.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-types.git
 [submodule "LieShouCloud-ui"]
 	path = LieShouCloud-ui
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-ui.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-ui.git
 [submodule "LieShouCloud-jwt-support"]
 	path = LieShouCloud-jwt-support
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-jwt-support.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-jwt-support.git
