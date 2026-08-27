@@ -18,12 +18,12 @@ jobs:
           submodules: recursive
       - name: Verify all components present
         run: |
-          test -f LieShouCloud-common/services/pom.xml
-          test -f LieShouCloud-jwt-support/services/pom.xml
+          test -f lieshou-cloud-common/services/pom.xml
+          test -f lieshou-cloud-jwt-support/services/pom.xml
           for svc in gateway user admin auth approval; do
-            test -f LieShouCloud-$svc-services/services/$svc/pom.xml
+            test -f lieshou-cloud-$svc-services/services/$svc/pom.xml
           done
-          test -f LieShouCloud-admin-web/package.json
+          test -f lieshou-cloud-admin-web/package.json
           echo "all components present ✓"
       - name: Validate docker-compose syntax
         run: docker compose -f deploy/docker-compose.yml config --quiet
@@ -44,9 +44,9 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: LieShouCloud-admin-web/pnpm-lock.yaml
+          cache-dependency-path: lieshou-cloud-admin-web/pnpm-lock.yaml
       - name: Build admin-web (frontend dist for nginx)
-        working-directory: LieShouCloud-admin-web
+        working-directory: lieshou-cloud-admin-web
         run: pnpm install --frozen-lockfile && pnpm build
       - name: Start full stack
         run: docker compose -f deploy/docker-compose.yml up -d --build
@@ -72,7 +72,7 @@ jobs:
           JOIN roles r ON r.code='TENANT_ADMIN' WHERE u.username='admin' ON CONFLICT DO NOTHING;
           SQL
       - name: Run Playwright e2e
-        working-directory: LieShouCloud-admin-web
+        working-directory: lieshou-cloud-admin-web
         run: npx playwright install chromium && pnpm e2e
         env:
           E2E_BASE_URL: http://localhost:8080

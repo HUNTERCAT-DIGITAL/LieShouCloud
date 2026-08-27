@@ -1,4 +1,4 @@
-# LieShouCloud · 猎手云开源版（演示项目）
+# lieshou-cloud · 猎手云开源版（演示项目）
 
 > **开源版全栈演示项目**：组合开源组件（后端底座 + 前端共享 + 4 端应用）+ 部署编排，一键起全栈，可直接部署体验完整数字化平台。
 > 组件独立演进，交付包只做组合与装配（与客户交付包同构的 superproject 模式）。
@@ -13,15 +13,15 @@
 ## 组合结构
 
 ```
-LieShouCloud（猎手云开源版 · 演示项目）
-├── LieShouCloud-common/        后端共享库(统一异常/错误码)
-├── LieShouCloud-jwt-support/   后端共享库(JWT)
-├── LieShouCloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
-├── LieShouCloud-{api-client,config,types,ui}/   前端共享层(2026-08 细拆分)
-├── LieShouCloud-admin-web/     B 端管理后台
-├── LieShouCloud-desktop/       桌面端
-├── LieShouCloud-mobile/        移动端
-├── LieShouCloud-mini-program/  微信小程序
+lieshou-cloud（猎手云开源版 · 演示项目）
+├── lieshou-cloud-common/        后端共享库(统一异常/错误码)
+├── lieshou-cloud-jwt-support/   后端共享库(JWT)
+├── lieshou-cloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
+├── lieshou-cloud-{api-client,config,types,ui}/   前端共享层(2026-08 细拆分)
+├── lieshou-cloud-admin-web/     B 端管理后台
+├── lieshou-cloud-desktop/       桌面端
+├── lieshou-cloud-mobile/        移动端
+├── lieshou-cloud-mini-program/  微信小程序
 └── deploy/                     一键全栈编排(infra + core 后端 + 前端 nginx)
 ```
 
@@ -33,12 +33,12 @@ git submodule update --init --recursive
 
 # 2. 构建后端(common + 服务仓,交付包统一构建入口)
 for svc in common jwt-support gateway user admin auth approval; do
-  [ "$svc" = "common" -o "$svc" = "jwt-support" ] && d="LieShouCloud-$svc" || d="LieShouCloud-$svc-services"
+  [ "$svc" = "common" -o "$svc" = "jwt-support" ] && d="lieshou-cloud-$svc" || d="lieshou-cloud-$svc-services"
   (cd $d/services && JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 mvn -B -ntp -DskipTests package)
 done
 
 # 3. 构建前端(admin-web 演示入口)
-cd LieShouCloud-admin-web
+cd lieshou-cloud-admin-web
 pnpm install && pnpm build
 
 # 4. 一键起全栈(infra + 后端 + 前端)
@@ -51,19 +51,19 @@ docker compose -f deploy/docker-compose.yml up -d
 
 | 组件 | 定位 | 说明 |
 | --- | --- | --- |
-| [LieShouCloud-common](LieShouCloud-common/README.md) / [jwt-support](LieShouCloud-jwt-support/README.md) | 后端共享库 | 异常契约 / JWT |
-| [LieShouCloud-api-client](LieShouCloud-api-client/README.md) / [config](LieShouCloud-config/README.md) / [types](LieShouCloud-types/README.md) / [ui](LieShouCloud-ui/README.md) | 前端共享 | 传输/配置/契约/UI(2026-08 细拆分) |
-| LieShouCloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(组合 common/jwt-support) |
-| [LieShouCloud-admin-web](LieShouCloud-admin-web/README.md) | B 端后台 | 演示/通用页面 |
-| [LieShouCloud-desktop](LieShouCloud-desktop/README.md) | 桌面端 | Tauri 2 |
-| [LieShouCloud-mobile](LieShouCloud-mobile/README.md) | 移动端 | Expo |
-| [LieShouCloud-mini-program](LieShouCloud-mini-program/README.md) | 小程序 | Taro |
+| [lieshou-cloud-common](lieshou-cloud-common/README.md) / [jwt-support](lieshou-cloud-jwt-support/README.md) | 后端共享库 | 异常契约 / JWT |
+| [lieshou-cloud-api-client](lieshou-cloud-api-client/README.md) / [config](lieshou-cloud-config/README.md) / [types](lieshou-cloud-types/README.md) / [ui](lieshou-cloud-ui/README.md) | 前端共享 | 传输/配置/契约/UI(2026-08 细拆分) |
+| lieshou-cloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(组合 common/jwt-support) |
+| [lieshou-cloud-admin-web](lieshou-cloud-admin-web/README.md) | B 端后台 | 演示/通用页面 |
+| [lieshou-cloud-desktop](lieshou-cloud-desktop/README.md) | 桌面端 | Tauri 2 |
+| [lieshou-cloud-mobile](lieshou-cloud-mobile/README.md) | 移动端 | Expo |
+| [lieshou-cloud-mini-program](lieshou-cloud-mini-program/README.md) | 小程序 | Taro |
 
 ## 升级组件(pin 策略)
 
 ```bash
 # 升级全部组件到各自 main
-for s in LieShouCloud-common LieShouCloud-jwt-support LieShouCloud-gateway-services LieShouCloud-user-services LieShouCloud-admin-services LieShouCloud-auth-services LieShouCloud-approval-services LieShouCloud-api-client LieShouCloud-config LieShouCloud-types LieShouCloud-ui LieShouCloud-admin-web LieShouCloud-desktop LieShouCloud-mobile LieShouCloud-mini-program; do
+for s in lieshou-cloud-common lieshou-cloud-jwt-support lieshou-cloud-gateway-services lieshou-cloud-user-services lieshou-cloud-admin-services lieshou-cloud-auth-services lieshou-cloud-approval-services lieshou-cloud-api-client lieshou-cloud-config lieshou-cloud-types lieshou-cloud-ui lieshou-cloud-admin-web lieshou-cloud-desktop lieshou-cloud-mobile lieshou-cloud-mini-program; do
   git -C $s fetch origin main && git -C $s checkout origin/main && git add $s
 done
 git commit -m "chore: bump components → latest"

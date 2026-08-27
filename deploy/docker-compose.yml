@@ -46,11 +46,11 @@ services:
     networks: [backend]
 
   # ============================================================
-  # core 后端(LieShouCloud-core)
+  # core 后端(lieshou-cloud-core)
   # ============================================================
   user:
     build:
-      context: ../LieShouCloud-user-services/services
+      context: ../lieshou-cloud-user-services/services
       dockerfile: user/Dockerfile
     image: lieshoucloud/user:dev
     container_name: lieshoucloud-user
@@ -66,7 +66,7 @@ services:
 
   admin:
     build:
-      context: ../LieShouCloud-admin-services/services
+      context: ../lieshou-cloud-admin-services/services
       dockerfile: admin/Dockerfile
     image: lieshoucloud/admin:dev
     container_name: lieshoucloud-admin
@@ -82,7 +82,7 @@ services:
 
   auth:
     build:
-      context: ../LieShouCloud-auth-services/services
+      context: ../lieshou-cloud-auth-services/services
       dockerfile: auth/Dockerfile
     image: lieshoucloud/auth:dev
     container_name: lieshoucloud-auth
@@ -98,7 +98,7 @@ services:
 
   approval:
     build:
-      context: ../LieShouCloud-approval-services/services
+      context: ../lieshou-cloud-approval-services/services
       dockerfile: approval/Dockerfile
     image: lieshoucloud/approval:dev
     container_name: lieshoucloud-approval
@@ -114,7 +114,7 @@ services:
 
   gateway:
     build:
-      context: ../LieShouCloud-gateway-services/services
+      context: ../lieshou-cloud-gateway-services/services
       dockerfile: gateway/Dockerfile
     image: lieshoucloud/gateway:dev
     container_name: lieshoucloud-gateway
@@ -146,8 +146,8 @@ services:
     ports:
       - "${WEB_PORT:-8080}:80"
     volumes:
-      # admin-web 构建产物(先:cd LieShouCloud-admin-web && pnpm build)
-      - ../LieShouCloud-admin-web/dist:/usr/share/nginx/html:ro
+      # admin-web 构建产物(先:cd lieshou-cloud-admin-web && pnpm build)
+      - ../lieshou-cloud-admin-web/dist:/usr/share/nginx/html:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks: [backend]
 
