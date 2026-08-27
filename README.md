@@ -14,9 +14,7 @@
 
 ```
 lieshou-cloud（猎手云开源版 · 演示项目）
-├── lieshou-cloud-common/        后端共享库(统一异常/错误码)
-├── lieshou-cloud-jwt-support/   后端共享库(JWT)
-├── lieshou-cloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-08 core 细拆分)
+├── lieshou-cloud-{gateway,user,admin,auth,approval}-services/  后端服务(2026-09 framework 战略:submodule 挂载 lieshou-framework,根聚合 pom)
 ├── lieshou-contract-{api,config,types}/ · lieshou-ui/  前端共享层(契约层 contract-* + ui)
 ├── lieshou-admin-web/     B 端管理后台
 ├── lieshou-desktop/       桌面端
@@ -31,10 +29,9 @@ lieshou-cloud（猎手云开源版 · 演示项目）
 # 1. 初始化全部组件
 git submodule update --init --recursive
 
-# 2. 构建后端(common + 服务仓,交付包统一构建入口)
-for svc in common jwt-support gateway user admin auth approval; do
-  [ "$svc" = "common" -o "$svc" = "jwt-support" ] && d="lieshou-cloud-$svc" || d="lieshou-cloud-$svc-services"
-  (cd $d/services && JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 mvn -B -ntp -DskipTests package)
+# 2. 构建后端(5 服务仓,交付包统一构建入口;framework submodule 经根聚合 pom 一次构建)
+for svc in gateway user admin auth approval; do
+  (cd lieshou-cloud-$svc-services && JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 mvn -B -ntp -DskipTests -f pom.xml package)
 done
 
 # 3. 构建前端(admin-web 演示入口)
@@ -51,9 +48,9 @@ docker compose -f deploy/docker-compose.yml up -d
 
 | 组件 | 定位 | 说明 |
 | --- | --- | --- |
-| [lieshou-cloud-common](lieshou-cloud-common/README.md) / [jwt-support](lieshou-cloud-jwt-support/README.md) | 后端共享库 | 异常契约 / JWT |
+| [lieshou-framework](https://github.com/HUNTERCAT-DIGITAL/lieshou-framework) | 核心框架(业务唯一源) | 2026-09 起经各服务仓 `framework/` submodule 挂载,jwt/common/auth 模块 |
 | [lieshou-contract-api](lieshou-contract-api/README.md) / [config](lieshou-contract-config/README.md) / [types](lieshou-contract-types/README.md) / [ui](lieshou-ui/README.md) | 前端共享 | 传输/配置/契约/UI(2026-09 契约层命名 contract-*) |
-| lieshou-cloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(组合 common/jwt-support) |
+| lieshou-cloud-{gateway,user,admin,auth,approval}-services | 后端服务 | 每服务一仓(根 pom 聚合 framework + services) |
 | [lieshou-admin-web](lieshou-admin-web/README.md) | B 端后台 | 演示/通用页面 |
 | [lieshou-desktop](lieshou-desktop/README.md) | 桌面端 | Tauri 2 |
 | [lieshou-mobile](lieshou-mobile/README.md) | 移动端 | Expo |
@@ -63,7 +60,7 @@ docker compose -f deploy/docker-compose.yml up -d
 
 ```bash
 # 升级全部组件到各自 main
-for s in lieshou-cloud-common lieshou-cloud-jwt-support lieshou-cloud-gateway-services lieshou-cloud-user-services lieshou-cloud-admin-services lieshou-cloud-auth-services lieshou-cloud-approval-services lieshou-contract-api lieshou-contract-config lieshou-contract-types lieshou-ui lieshou-admin-web lieshou-desktop lieshou-mobile lieshou-mini-program; do
+for s in lieshou-cloud-gateway-services lieshou-cloud-user-services lieshou-cloud-admin-services lieshou-cloud-auth-services lieshou-cloud-approval-services lieshou-contract-api lieshou-contract-config lieshou-contract-types lieshou-ui lieshou-admin-web lieshou-desktop lieshou-mobile lieshou-mini-program; do
   git -C $s fetch origin main && git -C $s checkout origin/main && git add $s
 done
 git commit -m "chore: bump components → latest"

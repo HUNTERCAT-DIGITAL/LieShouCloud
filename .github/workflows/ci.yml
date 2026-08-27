@@ -22,10 +22,11 @@ jobs:
           submodules: recursive
       - name: Verify all components present
         run: |
-          test -f lieshou-cloud-common/services/pom.xml
-          test -f lieshou-cloud-jwt-support/services/pom.xml
+          # 5 后端服务仓:根 pom 聚合 framework submodule + services(2026-09 framework 战略)
           for svc in gateway user admin auth approval; do
+            test -f lieshou-cloud-$svc-services/pom.xml
             test -f lieshou-cloud-$svc-services/services/$svc/pom.xml
+            test -d lieshou-cloud-$svc-services/framework
           done
           test -f lieshou-admin-web/package.json
           echo "all components present ✓"

@@ -10,9 +10,6 @@
 [submodule "lieshou-mini-program"]
 	path = lieshou-mini-program
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-mini-program.git
-[submodule "lieshou-cloud-common"]
-	path = lieshou-cloud-common
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-common.git
 [submodule "lieshou-cloud-gateway-services"]
 	path = lieshou-cloud-gateway-services
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-gateway-services.git
@@ -40,6 +37,3 @@
 [submodule "lieshou-ui"]
 	path = lieshou-ui
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-ui.git
-[submodule "lieshou-cloud-jwt-support"]
-	path = lieshou-cloud-jwt-support
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-jwt-support.git

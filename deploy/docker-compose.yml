@@ -50,8 +50,8 @@ services:
   # ============================================================
   user:
     build:
-      context: ../lieshou-cloud-user-services/services
-      dockerfile: user/Dockerfile
+      context: ../lieshou-cloud-user-services
+      dockerfile: services/user/Dockerfile
     image: lieshoucloud/user:dev
     container_name: lieshoucloud-user
     restart: unless-stopped
@@ -66,8 +66,8 @@ services:
 
   admin:
     build:
-      context: ../lieshou-cloud-admin-services/services
-      dockerfile: admin/Dockerfile
+      context: ../lieshou-cloud-admin-services
+      dockerfile: services/admin/Dockerfile
     image: lieshoucloud/admin:dev
     container_name: lieshoucloud-admin
     restart: unless-stopped
@@ -82,8 +82,8 @@ services:
 
   auth:
     build:
-      context: ../lieshou-cloud-auth-services/services
-      dockerfile: auth/Dockerfile
+      context: ../lieshou-cloud-auth-services
+      dockerfile: services/auth/Dockerfile
     image: lieshoucloud/auth:dev
     container_name: lieshoucloud-auth
     restart: unless-stopped
@@ -98,8 +98,8 @@ services:
 
   approval:
     build:
-      context: ../lieshou-cloud-approval-services/services
-      dockerfile: approval/Dockerfile
+      context: ../lieshou-cloud-approval-services
+      dockerfile: services/approval/Dockerfile
     image: lieshoucloud/approval:dev
     container_name: lieshoucloud-approval
     restart: unless-stopped
@@ -114,8 +114,8 @@ services:
 
   gateway:
     build:
-      context: ../lieshou-cloud-gateway-services/services
-      dockerfile: gateway/Dockerfile
+      context: ../lieshou-cloud-gateway-services
+      dockerfile: services/gateway/Dockerfile
     image: lieshoucloud/gateway:dev
     container_name: lieshoucloud-gateway
     restart: unless-stopped
