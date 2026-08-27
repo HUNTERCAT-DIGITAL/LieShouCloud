@@ -8,7 +8,7 @@ on:
 
 jobs:
   superproject:
-    name: Superproject (submodules + compose config + README)
+    name: Superproject (submodules + compose config)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Verify all submodules resolved
+      - name: Verify all components present
         run: |
           test -f LieShouCloud-common/services/pom.xml
           test -f LieShouCloud-jwt-support/services/pom.xml
@@ -26,5 +26,40 @@ jobs:
           test -f LieShouCloud-admin-web/package.json
           echo "all components present ✓"
       - name: Validate docker-compose syntax
+        run: docker compose -f deploy/docker-compose.yml config --quiet
+
+  e2e:
+    name: E2E (full stack + admin-web Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout (recursive)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: LieShouCloud-admin-web/pnpm-lock.yaml
+      - name: Build admin-web (frontend dist for nginx)
+        working-directory: LieShouCloud-admin-web
+        run: pnpm install --frozen-lockfile && pnpm build
+      - name: Start full stack
+        run: docker compose -f deploy/docker-compose.yml up -d --build
+      - name: Wait for gateway healthy
         run: |
-          docker compose -f deploy/docker-compose.yml config --quiet
+          for i in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:9000/actuator/health || true)
+            [ "$code" = "200" ] && echo "gateway ready" && break
+            echo "waiting ($i)..."; sleep 10
+          done
+          curl -sf http://localhost:9000/actuator/health
+      - name: Run Playwright e2e
+        working-directory: LieShouCloud-admin-web
+        run: npx playwright install chromium && pnpm e2e
+        env:
+          E2E_BASE_URL: http://localhost:8080
