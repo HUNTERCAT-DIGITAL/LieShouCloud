@@ -58,6 +58,19 @@ jobs:
             echo "waiting ($i)..."; sleep 10
           done
           curl -sf http://localhost:9000/actuator/health
+      - name: Seed multi-tenant data (acme tenant for tenant-switch e2e)
+        run: |
+          docker compose -f deploy/docker-compose.yml exec -T postgres psql -U postgres -d lieshoucloud <<'SQL'
+          INSERT INTO tenants (name, code) VALUES ('Acme 集团', 'acme') ON CONFLICT (code) DO NOTHING;
+          INSERT INTO users (tenant_id, username, display_name, email, password_hash, status)
+          SELECT t.id, 'admin', 'Acme 管理员', 'admin@acme.test', src.password_hash, 'ACTIVE'
+          FROM tenants t
+          CROSS JOIN (SELECT password_hash FROM users WHERE username='admin' AND tenant_id=(SELECT id FROM tenants WHERE code='huntercat')) src
+          WHERE t.code='acme' ON CONFLICT (tenant_id, username) DO NOTHING;
+          INSERT INTO user_roles (user_id, role_id)
+          SELECT u.id, r.id FROM users u JOIN tenants t ON t.id=u.tenant_id AND t.code='acme'
+          JOIN roles r ON r.code='TENANT_ADMIN' WHERE u.username='admin' ON CONFLICT DO NOTHING;
+          SQL
       - name: Run Playwright e2e
         working-directory: LieShouCloud-admin-web
         run: npx playwright install chromium && pnpm e2e
