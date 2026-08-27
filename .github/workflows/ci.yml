@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  superproject:
+    name: Superproject (submodules + compose config + README)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout (recursive)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Verify all submodules resolved
+        run: |
+          test -f LieShouCloud-common/services/pom.xml
+          test -f LieShouCloud-jwt-support/services/pom.xml
+          for svc in gateway user admin auth approval; do
+            test -f LieShouCloud-$svc-services/services/$svc/pom.xml
+          done
+          test -f LieShouCloud-admin-web/package.json
+          echo "all components present ✓"
+      - name: Validate docker-compose syntax
+        run: |
+          docker compose -f deploy/docker-compose.yml config --quiet
