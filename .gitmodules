@@ -1,15 +1,15 @@
 [submodule "lieshou-admin-web"]
 	path = lieshou-admin-web
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-admin-web.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-app-admin-web.git
 [submodule "lieshou-desktop"]
 	path = lieshou-desktop
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-desktop.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-app-desktop.git
 [submodule "lieshou-mobile"]
 	path = lieshou-mobile
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-mobile.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-app-mobile.git
 [submodule "lieshou-mini-program"]
 	path = lieshou-mini-program
-	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-mini-program.git
+	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-app-mini-program.git
 [submodule "lieshou-cloud-gateway-services"]
 	path = lieshou-cloud-gateway-services
 	url = git@github.com:HUNTERCAT-DIGITAL/lieshou-cloud-gateway-services.git
